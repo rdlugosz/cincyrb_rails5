@@ -34,13 +34,9 @@ _790_ contributors making over 7,000 commits in the release so far!
 Some new features, but also a lot of housekeeping; Sort of an El Capitan for
 Rails.
 
---
+http://railsdiff.org/4.2.5/5.0.0.beta1
 
-- http://railsdiff.org/4.2.5/5.0.0.beta1
-
---
-
-_Note: you must be running Ruby 2.2.2+_
+Note: you must be running at least Ruby 2.2.2
 
 ---
 
@@ -223,30 +219,63 @@ end
 
 ---
 
-# Other ActiveRecord improvements
+# ActiveRecord Improvements
 
 - `ActiveRecord::Relation#in_batches`
-    - executes block in chunks
+
+  - executes block in chunks
+
+--
+
 - `Post.where(id: 1).or(Post.where(id: 2))`
+
     - `#or` takes any relation/scope as an arg
+
+---
+
+# ActiveRecord Improvements
+
 - `has_secure_token`
+
     - For... whatever you may need a token for!
+
+--
+
+```ruby
+class Comment < ApplicationRecord
+  has_secure_token
+end
+
+irb> Comment.create.token
+=> "hWY9n6h4ifpWpV8r8GBTeGjB"
+```
 
 ---
 
 # Turbolinks 5... er, 3, er... 2.5.3?
 
 - Still a work in progress.
+
+--
+
 - TL 3 builds on work done by Shopify when [they abandoned Javascript MVC](https://engineering.shopify.com/17489056-rebuilding-the-shopify-admin-improving-developer-productivity-by-deleting-28-000-lines-of-javascript) (batman.js)
+
+--
+
 - TL 5 is a rewrite of TL 2.5.3 that incorporates _some_ of TL3 and adds
   important hooks for quasi-native iOS and Android apps.
-    - ...but it may not include things like _partial replacement_ in favor of
-    doing those things via XHR (or ActionCable). This will probably be
-    re-added later.
-    - Slated for release with Rails 5; [tracking
-      here](https://github.com/rails/turbolinks/issues/628)
 
-.right[![holy hand grenade](holy-hand-grenade-of-antioch.jpg)]
+--
+
+- ...but it may not include things like _partial replacement_ in favor of
+doing those things via XHR (or ActionCable). This will probably be
+re-added later.
+
+--
+
+- Slated for release with Rails 5; [tracking here](https://github.com/rails/turbolinks/issues/628)
+
+.center[![holy hand grenade](holy-hand-grenade-of-antioch.jpg)]
 
 ---
 
@@ -269,8 +298,7 @@ _...special guest..._
 
 --
 
-- [Text
-summary](http://hectorperezarenas.com/2015/12/26/rails-5-tutorial-how-to-create-a-chat-with-action-cable/) of video.
+- [Text summary](http://hectorperezarenas.com/2015/12/26/rails-5-tutorial-how-to-create-a-chat-with-action-cable/) of video.
 - [The sauce](https://github.com/HectorPerez/chat-in-rails5)
 
 ---
@@ -287,10 +315,12 @@ summary](http://hectorperezarenas.com/2015/12/26/rails-5-tutorial-how-to-create-
 # Misc...
 
 - `Integer#positive?` and `Integer#negative?`
+
 - `Date` and `DateTime` gain: `#prev_weekday, `#next_weekday, `#weekend?`
 
 - `ActionController::Renderer` - render arbitrary templates without being
   inside a controller action:
+
 ```ruby
 irb> BooksController.renderer.render :index, assigns: { books: Book.all }
   Book Load (0.0ms)  SELECT "books".* FROM "books"
@@ -299,6 +329,8 @@ irb> BooksController.renderer.render :index, assigns: { books: Book.all }
 ...
 ```
 
+- Trix WYSIWYG editor: http://trix-editor.org/
+
 ---
 
 # Thanks
@@ -306,5 +338,12 @@ irb> BooksController.renderer.render :index, assigns: { books: Book.all }
 ## Resources:
 
 - [Remark.js](https://github.com/gnab/remark) - cool markdown-to-html presentation tool
+
 - Talk with [several links](https://speakerdeck.com/claudiob/rails-5-awesome-features-and-breaking-changes) to smaller changes
+
+- [DHH Rails 5 Beta
+  Announcement](http://weblog.rubyonrails.org/2015/12/18/Rails-5-0-beta1/)
+  (includes links to all of the CHANGELOGs)
+
+- [Rails 5 Beta Announcement](http://weblog.rubyonrails.org/2015/12/19/this-week-in-rails-rails-5-the-beta-awakens/)
 
