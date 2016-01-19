@@ -82,8 +82,33 @@ You _could_ do all of that yourself, but...
 
 # ActiveRecord Improvements
 
+## ApplicationRecord
+
+All generated models will now descend from `ApplicationRecord` instead of
+`ActiveRecord::Base`. This provides a nice place to put extensions vs monkey
+patching AR Base:
+
+```ruby
+# ./app/models/book.rb
+class Book < ApplicationRecord
+end
+
+# ./app/models/application_record.rb
+class ApplicationRecord < ActiveRecord::Base
+  self.abstract_class = true
+end
+```
+
+---
+
+# Other ActiveRecord improvements
+
 - `ActiveRecord::Relation#in_batches`
+    - executes block in chunks 
 - `Post.where(id: 1).or(Post.where(id: 2))`
+    - `#or` takes any relation/scope as an arg
+- `has_secure_token` 
+    - For... whatever you may need a token for!
 
 ---
 
@@ -125,6 +150,32 @@ _...special guest..._
 - [Text
 summary](http://hectorperezarenas.com/2015/12/26/rails-5-tutorial-how-to-create-a-chat-with-action-cable/) of video.
 - [The sauce](https://github.com/HectorPerez/chat-in-rails5)
+
+---
+
+# SPEED!
+
+- 
+
+
+.center[![warp speed cat](warp_speed_cat.gif)]
+
+---
+
+# Misc...
+
+- `Integer#positive?` and `Integer#negative?`
+- `Date` and `DateTime` gain: `#prev_weekday, `#next_weekday, `#weekend?`
+
+- `ActionController::Renderer` - render arbitrary templates without being
+  inside a controller action:
+```ruby
+irb> BooksController.renderer.render :index, assigns: { books: Book.all }
+  Book Load (0.0ms)  SELECT "books".* FROM "books"
+  Rendered books/index.html.erb within layouts/application (1.1ms)
+=> "<!DOCTYPE html>\n<html>\n  <head>\n    <title>All Books</title>\n
+...
+```
 
 ---
 
