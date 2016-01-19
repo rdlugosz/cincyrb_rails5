@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @token_holder.name %>
+</p>
+
+<p>
+  <strong>Token:</strong>
+  <%= @token_holder.token %>
+</p>
+
+<%= link_to 'Edit', edit_token_holder_path(@token_holder) %> |
+<%= link_to 'Back', token_holders_path %>
