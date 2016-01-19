@@ -93,6 +93,11 @@ You _could_ do all of that yourself, but...
 - TL 3 builds on work done by Shopify when [they abandoned Javascript MVC](https://engineering.shopify.com/17489056-rebuilding-the-shopify-admin-improving-developer-productivity-by-deleting-28-000-lines-of-javascript) (batman.js)
 - TL 5 is a rewrite of TL 2.5.3 that incorporates _some_ of TL3 and adds
   important hooks for quasi-native iOS and Android apps.
+    - ...but it may not include things like _partial replacement_ in favor of
+    doing those things via XHR (or ActionCable). This will probably be
+    re-added later.
+    - Slated for release with Rails 5; [tracking
+      here](https://github.com/rails/turbolinks/issues/628)
 
 .right[![holy hand grenade](holy-hand-grenade-of-antioch.jpg)]
 
@@ -101,6 +106,13 @@ You _could_ do all of that yourself, but...
 # ActionCable
 
 Easy to use Web Sockets framework for Rails apps.
+
+- https://github.com/rails/rails/blob/master/actioncable/README.md
+- https://github.com/rails/actioncable-examples
+
+_...special guest..._
+
+--
 
 - DHH: [Build a chat app in 5* minutes!](https://youtu.be/n0WUjGkDFS0)
 
