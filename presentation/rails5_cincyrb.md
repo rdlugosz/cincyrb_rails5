@@ -61,11 +61,54 @@ $ rails new my_api_app --api
 
 --
 
-No.
+### No.
 
 --
 
 Rails gets you: Reloading, Dev/Test modes, Logging, Security, Param Parsing, Conditional GETs, Caching, HEAD requests, Resource (REST) Routing, URL Generation, Header & Redirection responses, Instrumentation, Generators, Billions of plugins, connecting to your database...
 
+--
+
 You _could_ do all of that yourself, but...
 
+![wrote my own crypto](wrote_own_crypto.gif)
+
+---
+
+# Attributes API
+
+
+---
+
+# ActiveRecord Improvements
+
+- `ActiveRecord::Relation#in_batches`
+- `Post.where(id: 1).or(Post.where(id: 2))`
+
+---
+
+# Turbolinks 5... er, 3, er... 2.5.3?
+
+- Still a work in progress.
+- TL 3 builds on work done by Shopify when [they abandoned Javascript MVC](https://engineering.shopify.com/17489056-rebuilding-the-shopify-admin-improving-developer-productivity-by-deleting-28-000-lines-of-javascript) (batman.js)
+- TL 5 is a rewrite of TL 2.5.3 that incorporates _some_ of TL3 and adds
+  important hooks for quasi-native iOS and Android apps.
+
+.right[![holy hand grenade](holy-hand-grenade-of-antioch.jpg)]
+
+---
+
+# ActionCable
+
+Easy to use Web Sockets framework for Rails apps.
+
+[Build a chat app in 5 minutes!](https://youtu.be/n0WUjGkDFS0)
+
+
+---
+
+# Thanks
+
+## Resources:
+
+- [Remark.js](https://github.com/gnab/remark) - cool markdown-to-html presentation tool
