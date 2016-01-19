@@ -6,6 +6,8 @@ class: center, middle
 ## cincy.rb 19jan2016
 ### ryan dlugosz -- @lbwski
 
+#### https://github.com/rdlugosz/cincyrb_rails5
+
 ---
 
 ## Installing the beta
@@ -15,22 +17,42 @@ $ gem install rails --pre
 $ rails new luftwaffles --database=postgresql
 ```
 
+--
+
 To run off master:
 ```ruby
 # Gemfile
 gem 'rails', github: "rails/rails"
 ```
 
-_Note: you must be running Ruby 2.2.2+_
+--
+
+_790_ contributors making over 7,000 commits in the release so far!
+
+--
+
+Some new features, but also a lot of housekeeping; Sort of an El Capitan for
+Rails.
+
+--
 
 - http://railsdiff.org/4.2.5/5.0.0.beta1
+
+--
+
+_Note: you must be running Ruby 2.2.2+_
 
 ---
 
 ## Why Ruby 2.2+?
 
 - Symbols are now garbage collected
+
+--
+
 - Plus... why not?
+
+--
 
 _(show `webscale_symbols.rb`)_
 
@@ -39,18 +61,26 @@ _(show `webscale_symbols.rb`)_
 ## Commands run via `rails` vs `rake`
 
 - Slightly less confusion, especially for new users
+
+--
+
 - You can still use `rake` if you'd prefer.
 
 ---
 
 ## Rails API
 
-- For rofl-scale projects who want micro-service architecture
+- For rofl-scale projects who want microservice architecture
 - Backend for mobile apps, etc.
+
+--
 
 ```shell
 $ rails new my_api_app --api
 ```
+
+--
+
 - Merge of https://github.com/rails-api/rails-api
 - Changes: No views, assets, helpers, cookies, CSRF
 - Controllers inherit from `ActionController::API`
@@ -65,7 +95,7 @@ $ rails new my_api_app --api
 
 --
 
-Rails gets you: Reloading, Dev/Test modes, Logging, Security, Param Parsing, Conditional GETs, Caching, HEAD requests, Resource (REST) Routing, URL Generation, Header & Redirection responses, Instrumentation, Generators, Billions of plugins, connecting to your database...
+Rails gets you: Reloading, Dev/Test modes, Logging, Security, Param Parsing, Conditional GETs, Caching, HEAD requests, Resource (REST) Routing, URL Generation, Header & Redirection responses, Instrumentation, Generators, plugins, connecting to your database, provides standard APIs for libraries, etc...
 
 --
 
@@ -77,6 +107,98 @@ You _could_ do all of that yourself, but...
 
 # Attributes API
 
+```ruby
+# db/schema.rb
+create_table :store_listings, force: true do |t|
+  t.decimal :price_in_cents
+end
+```
+--
+
+```ruby
+# app/models/store_listing.rb
+class StoreListing < ActiveRecord::Base
+end
+
+store_listing = StoreListing.new(price_in_cents: '10.1')
+```
+--
+
+```ruby
+# before
+store_listing.price_in_cents # => BigDecimal.new(10.1)
+```
+
+---
+
+## ...using the Attributes API
+
+```ruby
+class StoreListing < ActiveRecord::Base
+  attribute :price_in_cents, :integer
+end
+```
+
+--
+
+```ruby
+# after
+store_listing.price_in_cents # => 10
+```
+---
+
+## ...using the Attributes API
+
+```ruby
+#Attributes do not need to be backed by a database column.
+
+class MyModel < ActiveRecord::Base
+  attribute :my_string, :string
+  attribute :my_int_array, :integer, array: true
+  attribute :my_float_range, :float, range: true
+end
+
+model = MyModel.new(
+  my_string: "string",
+  my_int_array: ["1", "2", "3"],
+  my_float_range: "[1,3.5]",
+)
+model.attributes
+# =>
+  {
+    my_string: "string",
+    my_int_array: [1, 2, 3],
+    my_float_range: 1.0..3.5
+  }
+```
+
+---
+
+# Create custom types
+
+```ruby
+class MoneyType < ActiveRecord::Type::Integer
+    def type_cast(value)
+        if value.include?('$')
+            price_in_dollars = value.gsub(/\$/, '').to_f
+            price_in_dollars * 100
+        else
+            value.to_i
+        end
+    end
+end
+
+class StoreListing < ActiveRecord::Base
+    attribute :price_in_cents, MoneyType.new
+end
+
+store_listing = StoreListing.new(price_in_cents: '$10.00')
+store_listing.price_in_cents # => 1000
+```
+
+Recommended that your type is based off of an existing `Type`. Attributes API
+also used during data retreival and other lower-level operations. [See Code](https://github.com/rails/rails/blob/8c752c7ac739d5a86d4136ab1e9d0142c4041e58/activerecord/lib/active_record/attributes.rb) for
+details.
 
 ---
 
@@ -104,10 +226,10 @@ end
 # Other ActiveRecord improvements
 
 - `ActiveRecord::Relation#in_batches`
-    - executes block in chunks 
+    - executes block in chunks
 - `Post.where(id: 1).or(Post.where(id: 2))`
     - `#or` takes any relation/scope as an arg
-- `has_secure_token` 
+- `has_secure_token`
     - For... whatever you may need a token for!
 
 ---
@@ -155,7 +277,7 @@ summary](http://hectorperezarenas.com/2015/12/26/rails-5-tutorial-how-to-create-
 
 # SPEED!
 
-- 
+- https://github.com/rails/rails/pull/21057
 
 
 .center[![warp speed cat](warp_speed_cat.gif)]
@@ -184,3 +306,5 @@ irb> BooksController.renderer.render :index, assigns: { books: Book.all }
 ## Resources:
 
 - [Remark.js](https://github.com/gnab/remark) - cool markdown-to-html presentation tool
+- Talk with [several links](https://speakerdeck.com/claudiob/rails-5-awesome-features-and-breaking-changes) to smaller changes
+
