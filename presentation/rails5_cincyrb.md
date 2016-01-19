@@ -1,17 +1,20 @@
 # Shiny things in Rails 5
+
+
 ## cincy.rb 19jan2016
-## ryan dlugosz -- @lbwski
+### ryan dlugosz -- @lbwski
 
 ---
 
 ## Installing the beta
 
-!shell
+```shell
 $ gem install rails --pre
 $ rails new luftwaffles --database=postgresql
+```
 
 To run off master:
-```
+```ruby
 # Gemfile
 gem 'rails', github: "rails/rails"
 ```
@@ -42,7 +45,7 @@ _Note: you must be running Ruby 2.2.2+_
 - For rofl-scale projects who want micro-service architecture
 - Backend for mobile apps, etc.
 
-```
+```shell
 $ rails new my_api_app --api
 ```
 - Merge of https://github.com/rails-api/rails-api
