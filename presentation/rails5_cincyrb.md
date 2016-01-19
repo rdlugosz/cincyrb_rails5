@@ -1,4 +1,4 @@
-# Shiny things in Rails 5
+# Shiny things in RAILS 5
 
 
 ## cincy.rb 19jan2016
@@ -29,7 +29,8 @@ _Note: you must be running Ruby 2.2.2+_
 
 - Symbols are now garbage collected
 - Plus... why not?
-- (show `webscale_symbols.rb`)
+
+_(show `webscale_symbols.rb`)_
 
 ---
 

@@ -7,22 +7,26 @@
     <style>
       body { font-family: Helvetica; }
       h1, h2, h3 {
-        font-family: Futura;
+        font-family: Avenir;
         font-weight: normal;
       }
+      h1 { text-transform: uppercase; }
       .remark-code, .remark-inline-code { font-family: Hack, monospace; }
     </style>
   </head>
   <body>
-    <textarea id="source">
-
-    </textarea>
     <script src="remark-latest.min.js">
     </script>
     <script>
-      var slideshow = remark.create();
       var slideshow = remark.create({
-        sourceUrl: 'rails5_cincyrb.md'
+        sourceUrl: 'rails5_cincyrb.md',
+        ratio: '16:9',
+        navigation: { scroll: false },
+        highlightStyle: 'solarized-light',
+
+        slideNumberFormat: function (current, total) {
+          return '<small>ryan dlugosz &ndash; <small>@lbwski</small></small> ' + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + current + ' / ' + total;
+        },
       });
     </script>
   </body>
