@@ -1,3 +1,5 @@
+class: center, middle
+
 # Shiny things in RAILS 5
 
 
@@ -53,9 +55,17 @@ $ rails new my_api_app --api
 - Changes: No views, assets, helpers, cookies, CSRF
 - Controllers inherit from `ActionController::API`
 
-### Shouldn't I just use Sinatra?
+---
 
-- No.
+## Shouldn't I just use Sinatra?
 
+--
 
+No.
+
+--
+
+Rails gets you: Reloading, Dev/Test modes, Logging, Security, Param Parsing, Conditional GETs, Caching, HEAD requests, Resource (REST) Routing, URL Generation, Header & Redirection responses, Instrumentation, Generators, Billions of plugins, connecting to your database...
+
+You _could_ do all of that yourself, but...
 
