@@ -102,8 +102,17 @@ You _could_ do all of that yourself, but...
 
 Easy to use Web Sockets framework for Rails apps.
 
-[Build a chat app in 5 minutes!](https://youtu.be/n0WUjGkDFS0)
+- DHH: [Build a chat app in 5* minutes!](https://youtu.be/n0WUjGkDFS0)
 
+--
+
+.footnote[_ * actually about 17 minutes_]
+
+--
+
+- [Text
+summary](http://hectorperezarenas.com/2015/12/26/rails-5-tutorial-how-to-create-a-chat-with-action-cable/) of video.
+- [The sauce](https://github.com/HectorPerez/chat-in-rails5)
 
 ---
 
